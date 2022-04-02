@@ -1,0 +1,37 @@
+{
+  "type": "bar",
+  "data": {
+    "labels": ["March", "April", "May"],
+    "datasets": [{
+      "label": "JH Total",
+      "backgroundColor": "#1774E5",
+      "data": [100, 90, 100],
+      "borderWidth": 0,
+      "maxBarThickness": 25
+    },
+    {
+      "label": "AM Team",
+      "backgroundColor": "#900BF1",
+      "data": [70, 80, 60],
+      "borderWidth": 0,
+      "maxBarThickness": 25
+    },
+    {
+      "label": "PM Team",
+      "backgroundColor": "#66C8FF",
+      "data": [100, 80, 100],
+      "borderWidth": 0,
+      "maxBarThickness": 25
+    },
+    {
+      "label": "Web Team",
+      "backgroundColor": "#FE9313",
+      "data": [60, 60, 80],
+      "borderWidth": 0,
+      "maxBarThickness": 25
+    }]
+  },
+  "options": {
+    "maintainAspectRatio": false
+  }
+}

@@ -6,20 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon">
 
-    <!-- jQuery -->
+    <!-- jQuery - 3.6.0 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- GridStack -->
+    <!-- GridStack - 5.0.0 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/5.0.0/gridstack-h5.min.js" integrity="sha512-LfvnPzPyY1n+xsUV87eJB5u7EnDda5CI0FrKMLUV2szh1i6HS7/zy626sC0HDPh9HoEG5FtW/tg9TDWzeD4dhw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/5.0.0/gridstack.min.css" integrity="sha512-fUN9aO64eYDb4vrlQrSuhabckaNlFo/+34YxvRZ4+l9mk8NZHsWVw1nIWLM++oN/1U5rY+Q+1bWFeLT+dA9YPQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridstack.js/5.0.0/gridstack-extra.min.css" integrity="sha512-xO0M5KAPcgkZEVPqvAQ2wakjrrsJAcrWROvDE4y1YaNuoB2+Q31kJAE48v520QxUgx/G9MmiOzw4q1eC/nV2cw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- ChartJS -->
+    <!-- ChartJS - 3.7.1 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- ChartJS Annotation Plugin - 1.4.0 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.4.0/chartjs-plugin-annotation.min.js" integrity="sha512-HrwQrg8S/xLPE6Qwe7XOghA/FOxX+tuVF4TxbvS73/zKJSs/b1gVl/P4MsdfTFWYFYg/ISVNYIINcg35Xvr6QQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Modal -->
     <link rel="stylesheet" href="assets/modal/modal.css">
     <script src="assets/modal/modal.js"></script>
+
+    <!-- Proxima Nova - Adobe Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/dem0eqd.css">
 
     <script src="assets/scripts.js" defer></script>
     <link rel="stylesheet" href="assets/styles.css">
@@ -33,222 +39,27 @@
           <img src="assets/images/Brand.svg" />
           <h2>Key Performance Indicators</h2>
         </div>
-      </div>
-  
-      <div class="dashboard">
-        <div class="grid-stack">
-          
-          <!-- Pie Chart - Work Entries -->
-          <div class="grid-stack-item" gs-w="2" gs-h="2">
-            <div class="grid-stack-item-content">
-              <div class="grid-item-info">
-                <h3 class="grid-item-title">Work Entries</h3>
-                <p class="grid-item-desc">% of work entries in on-time</p>
-              </div>
-              <div class="chart-container">
-                <canvas id="workEntries"></canvas>
-                <div class="chart-label">
-                  <h2 class="current goal-met">75%</h2>
-                  <p>Goal: 60%</p>
-                </div>
-              </div>
-            </div>
-          </div>
-  
-          <!-- Line Chart - Sales Per Quarter -->
-          <div class="grid-stack-item" gs-w="6" gs-h="2">
-            <div class="grid-stack-item-content">
-              <div class="expand-toggle" onClick="expandTile(this)"></div>
-  
-              <div class="grid-item-info">
-                <h3 class="grid-item-title">Sales Per Quarter</h3>
-                <p class="grid-item-desc">This is a very short description</p>
-              </div>
-              <div class="chart-container">
-                <canvas id="chart1"></canvas>
-              </div>
-              
-            </div>
-          </div>
-      
-          <!-- Bar Chart - Utilization Rate -->
-          <div class="grid-stack-item" gs-w="4" gs-h="2" gs-min-h="2">
-            <div class="grid-stack-item-content gs-item-expandable">
-              <div class="above-fold">
-                <div class="expand-toggle" onClick="expandTile(this)"></div>
-  
-                <div class="grid-item-info">
-                  <h3 class="grid-item-title">Utilization Rate</h3>
-                  <p class="grid-item-desc">% of billable hours against total hours available</p>
-                </div>
-  
-                <div class="chart-container">
-                  <canvas id="utilizationRateCanvas"></canvas>
-                </div>
-              </div>
-              
-              <div class="below-fold">
-                <div class="breakdown">
-                  <ul>
-  
-                    <li>
-                      <ul>
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              <div class="color-label b"></div>
-                              Company Total
-                            </h3>
-                            <div class="performance r">25%</div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-  
-                    <li>
-                      <ul>
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              <div class="color-label p"></div>
-                              Account Managers
-                            </h3>
-                            <div class="performance r">25%</div>
-                          </div>
-                        </li>
-                        
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              Chris Polhamus
-                            </h3>
-                            <div class="performance r">50%</div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              Patrick Florea
-                            </h3>
-                            <div class="performance g">75%</div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                    
-                    <li>
-                      <ul>
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              <div class="color-label o"></div>
-                              Account Managers
-                            </h3>
-                            <div class="performance r">25%</div>
-                          </div>
-                        </li>
-                        
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              Chris Polhamus
-                            </h3>
-                            <div class="performance r">50%</div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              Patrick Florea
-                            </h3>
-                            <div class="performance g">75%</div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-  
-                    <li>
-                      <ul>
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              <div class="color-label c"></div>
-                              Account Managers
-                            </h3>
-                            <div class="performance r">25%</div>
-                          </div>
-                        </li>
-                        
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              Chris Polhamus
-                            </h3>
-                            <div class="performance r">50%</div>
-                          </div>
-                        </li>
-                        <li>
-                          <div class="group">
-                            <h3 class="group-name">
-                              Patrick Florea
-                            </h3>
-                            <div class="performance g">75%</div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-      
-          <!-- Percentage - Margin Per Job -->
-          <div class="grid-stack-item" gs-w="2" gs-h="1">
-            <div class="grid-stack-item-content">
-              <div class="grid-item-info">
-                <h3 class="grid-item-title">Margin Per Job</h3>
-                <p class="grid-item-desc">20% of profit on closed jobs</p>
-              </div>
-              <div class="half-tile-content">
-                <h2 class="current goal-met">75%</h2>
-                <p>Goal: 50%</p>
-              </div>
-            </div>
-          </div>
-      
-          <div class="grid-stack-item" gs-w="2" gs-h="1">
-            <div class="grid-stack-item-content">Item 1</div>
-          </div>
-      
-          <div class="grid-stack-item" gs-w="2" gs-h="1">
-            <div class="grid-stack-item-content">Item 2</div>
-          </div>
-      
-          <div class="grid-stack-item" gs-w="2" gs-h="1">
-            <div class="grid-stack-item-content">Item 3</div>
-          </div>
+
+        <div class="buttons">
+          <button type="button" onClick="promptAddItem()">Add Item</button>
+          <button type="button" onClick="destroyCharts()">Destroy All Charts</button>
+          <button type="button" onClick="saveGrid()">Save Layout</button>
         </div>
       </div>
   
+      <div class="dashboard">
+        <div class="grid-stack"></div>
+      </div>
     </div>
-  
-  
-    <button onClick="addItem()">Add Item</button>
-    <button onClick="saveGrid()">Save</button>
-    <button onClick="loadGrid()">Load</button>
   
     <div id="modal" class="modal">
       <div class="modal-inner">
         <div class="modal-title">Dialog</div>
-        <div class="modal-body">
-          <textarea></textarea>
-        </div>
+        <div class="modal-body"></div>
         <div class="modal-buttons">
-          <button type="button" onclick="Modal.hide()">Dismiss</button>
+          <button type="button" class="btn" onclick="Modal.hide()">Dismiss</button>
         </div>
       </div>
     </div>
-    
   </body>
 </html>

@@ -1,33 +1,72 @@
-// Looks dirty but this is just for dev
-var gridLayout = $.ajax({
-  type: 'GET',
-  url: '../data/gridLayout.json',
-  dataType: 'json',
-  async: false
-});
+var grid, charts = [];
 
+function loadGridStackLayout() {
+  if (typeof GridStack !== 'undefined') {
+    grid = GridStack.init({
+      column: 8,
+      cellHeight: 170,
+      alwaysShowResizeHandle: true,
+    });
 
-const cellGap = 10;
-const cellPadding = 34;
-const innerCellHeight = 150;
-const actualCellHeight = 150 + (cellPadding * 2) + (cellGap * 2);
+    // Get grid layout from JSON
+    $.getJSON('../data/gridLayout.json', function (data) {
+      // grid.load(data);
+      loadChartJS();
+    })
+    .fail(function () {
+      alert('No GridStack profile found! Using blank grid.');
+    })
+  }
+}
 
-/**
-   * Gridstack Initialization
-   */
-var grid = GridStack.init({
-  column: 8,
-  cellHeight: 170,
-});
+function loadChartJS() {
+  let chartCanvases = document.querySelectorAll('.chart-container > canvas');
 
-grid.load(gridLayout);
+  if (chartCanvases.length) {
+    chartCanvases.forEach(canvas => {
+      // Attempt load data based on canvas ID
+      // Don't spend too much time on this, likely vastly different in reality.
+      $.getJSON(`../data/${canvas.dataset.chartType}.json`, data => {
+        charts.push(new Chart(canvas.getContext('2d'), data));
+      })
+      .fail(() => {
+        alert(`No data found for ${canvas.dataset.chartType}`);
+        // Replace canvas with error text
+      })
+    });
+  }
+}
 
-function addItem(text = "Item") {
-  grid.addWidget({
-    w: 2,
-    h: 1,
-    content: text
-  });
+function promptAddItem() {
+  if (typeof Modal !== 'undefined') {
+    Modal.show(`
+      <div class="add-widget">
+        <select onchange="addItem()">
+          <option selected disabled>Chart type...</option>
+          <option>Doughnut</option>
+          <option>Line</option>
+          <option>Bar</option>
+          <option>Half Tile</option>
+        </select>
+      </div>
+    `);
+  }
+}
+
+function addItem() {
+  let s = document.querySelector('.modal-body .add-widget > select');
+  s = s.value.replace(/ /g,'')
+  fetch(`../charts/${s}.html`)
+    .then(response => response.text())
+    .then(data => {
+      Modal.hide();
+
+      let $dataEl = $.parseHTML(data),
+          $actualElement = $dataEl[$dataEl.length-1];
+      grid.addWidget($actualElement);
+      destroyCharts();
+      loadChartJS();
+    });
 }
 
 function expandTile(btn) {
@@ -35,11 +74,12 @@ function expandTile(btn) {
   let oldHeight = tile.getAttribute('gs-h');
   
   if (tile.dataset.expanded == 'true') {
-    // Already expanded
+    // Maxmimzed
     grid.update(tile, { h: oldHeight/2 });
     tile.setAttribute('data-expanded', 'false');
     btn.classList.remove('active');
   } else {
+    // Minimized
     grid.update(tile, { h: oldHeight*2 });
     tile.setAttribute('data-expanded', 'true');
     btn.classList.add('active');
@@ -49,107 +89,28 @@ function expandTile(btn) {
 function saveGrid() {
   if (grid) {
     let serializedGrid = grid.save();
-    Modal.show(serializedGrid)
+    Modal.show("<p>Paste into data/gridLayout.json:</p>");
+    let ta = $('<textarea>');
+    ta.val(JSON.stringify(serializedGrid, null, 2));
+    $('.modal-body').append(ta);
+    if (!$('.modal-buttons > button.copy').length);
+      $('.modal-buttons').prepend('<button type="button" class="btn copy" onclick="Modal.copy()">Copy</button>');
   }
 }
 
-function loadGrid() {
-  let config = prompt("Paste GridStack serialized config here:");
-  if ((config && grid) && typeof config == 'string') {
-    grid.removeAll(false);
-    grid.load(JSON.parse(config), true);
-  }
+function destroyCharts() {
+  charts.forEach(chart => { chart.destroy() })
+}
+
+function removeTile(buttonElement) {
+  let tile = $(buttonElement).closest('.grid-stack-item');
+  if (tile.length) grid.removeWidget(tile[0]);
 }
 
 
-/**
- * Chart.js Initialization
- */
-const workEntriesContext = document.getElementById('workEntries').getContext('2d');
-const workEntriesChart = new Chart(workEntriesContext, {
-  type: 'doughnut',
-  data: {
-    datasets: [{
-      data: [75, 25],
-      backgroundColor: [
-        '#0BB22E',
-        '#E7E7EA'
-      ],
-      borderWidth: 0
-    }]
-  },
-  options: {
-    maintainAspectRatio: false,
-    cutout: '75%'
-  }
-})
 
-const spqContext = document.getElementById('chart1').getContext('2d');
-const spqChart = new Chart(spqContext, {
-  type: 'line',
-  data: {
-    labels: ['Q1 - 2021', 'Q2 - 2021', 'Q3 - 2021', 'Q4 - 2021'],
-    datasets: [{
-      data: [200000, 400000, 300000, 400000],
-      fill: true,
-      backgroundColor: 'rgba(54, 162, 235, 0.1)',
-      borderColor: [
-        'rgba(54, 162, 235, 1)'
-      ],
-      borderWidth: 2,
-      pointBackgroundColor: 'rgba(54, 162, 235, 1)'
-    }]
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true
-      }
-    },
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        display: false
-      }
-    }
-  }
+$('.grid-stack').click(function (e) {
+  if (e.target === this && $(e.target).is(':empty')) promptAddItem()
 });
 
-const utilizationRateContext = document.getElementById('utilizationRateCanvas').getContext('2d');
-const utilizationRateChart = new Chart(utilizationRateContext, {
-  type: 'bar',
-  data: {
-    labels: ['March', 'April', 'May'],
-    datasets: [{
-      label: 'JH Total',
-      backgroundColor: '#1774E5',
-      data: [100, 90, 100],
-      borderWidth: 0,
-      maxBarThickness: 25
-    },
-    {
-      label: 'AM Team',
-      backgroundColor: '#900BF1',
-      data: [70, 80, 60],
-      borderWidth: 0,
-      maxBarThickness: 25
-    },
-    {
-      label: 'PM Team',
-      backgroundColor: '#66C8FF',
-      data: [100, 80, 100],
-      borderWidth: 0,
-      maxBarThickness: 25
-    },
-    {
-      label: 'Web Team',
-      backgroundColor: '#FE9313',
-      data: [60, 60, 80],
-      borderWidth: 0,
-      maxBarThickness: 25
-    }]
-  },
-  options: {
-    maintainAspectRatio: false
-  }
-});
+loadGridStackLayout()

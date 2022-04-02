@@ -1,0 +1,21 @@
+<!-- Doughnut Chart - Work Entries -->
+<div class="grid-stack-item" gs-w="2" gs-h="2" gs-no-resize="true">
+  <div class="grid-stack-item-content">
+    <div class="tile-controls">
+      <div class="expand-toggle" onClick="expandTile(this)"></div>
+      <div class="delete-grid-item" onClick="removeTile(this)"></div>
+    </div>
+
+    <div class="grid-item-info">
+      <h3 class="grid-item-title">Work Entries</h3>
+      <p class="grid-item-desc">% of work entries in on-time</p>
+    </div>
+    <div class="chart-container">
+      <canvas data-chart-type="doughnut"></canvas>
+      <div class="doughnut-chart-label">
+        <h2 class="current met-goal">75%</h2>
+        <p>Goal: 60%</p>
+      </div>
+    </div>
+  </div>
+</div>

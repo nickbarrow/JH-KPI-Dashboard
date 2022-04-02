@@ -1,0 +1,48 @@
+{
+  "type": "line",
+  "data": {
+    "labels": ["Q1 - 2021", "Q2 - 2021", "Q3 - 2021", "Q4 - 2021"],
+    "datasets": [{
+      "label": "JH Total",
+      "data": [200000, 400000, 300000, 400000],
+      "fill": true,
+      "backgroundColor": "rgba(54, 162, 235, 0.1)",
+      "borderColor": [
+        "rgba(54, 162, 235, 1)"
+      ],
+      "borderWidth": 2,
+      "pointBackgroundColor": "rgba(54, 162, 235, 1)"
+    }]
+  },
+  "options": {
+    "scales": {
+      "y": {
+        "beginAtZero": true
+      }
+    },
+    "maintainAspectRatio": false,
+    "plugins": {
+      "legend": {
+        "position": "bottom",
+        "labels": {
+          "font": {
+            "family": "proxima-nova, sans-serif"
+          },
+          "boxWidth": 12
+        }
+      },
+      "autocolors": false,
+      "annotation": {
+        "annotations": {
+          "line1": {
+            "type": "line",
+            "yMin": 300000,
+            "yMax": 300000,
+            "borderColor": "#0BB22E",
+            "borderWidth": 2
+          }
+        }
+      }
+    }
+  }
+}
