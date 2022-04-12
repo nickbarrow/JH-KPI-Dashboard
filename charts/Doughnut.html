@@ -2,19 +2,135 @@
 <div class="grid-stack-item" gs-w="2" gs-h="2" gs-no-resize="true">
   <div class="grid-stack-item-content">
     <div class="tile-controls">
-      <div class="expand-toggle" onClick="expandTile(this)"></div>
-      <div class="delete-grid-item" onClick="removeTile(this)"></div>
+      <div class="expand-toggle" onClick="Dashboard.expandChart(this)"></div>
+      <div class="delete-grid-item" onClick="Dashboard.removeChart(this)"></div>
     </div>
 
-    <div class="grid-item-info">
-      <h3 class="grid-item-title">Work Entries</h3>
-      <p class="grid-item-desc">% of work entries in on-time</p>
+    <div class="above-fold">
+      <div class="grid-item-info">
+        <h3 class="grid-item-title">Work Entries</h3>
+        <p class="grid-item-desc">% of work entries in on-time</p>
+      </div>
+      <div class="chart-container">
+        <canvas data-chart-type="doughnut"></canvas>
+        <div class="doughnut-chart-label">
+          <h2 class="current met-goal">75%</h2>
+          <p>Goal: 60%</p>
+        </div>
+      </div>
     </div>
-    <div class="chart-container">
-      <canvas data-chart-type="doughnut"></canvas>
-      <div class="doughnut-chart-label">
-        <h2 class="current met-goal">75%</h2>
-        <p>Goal: 60%</p>
+
+    <div class="below-fold scroll-shadows">
+      <div class="breakdown">
+        <ul>
+
+          <li>
+            <ul>
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    <div class="color-label b"></div>
+                    Company Total
+                  </h3>
+                  <div class="performance r">25%</div>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <ul>
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    <div class="color-label p"></div>
+                    Account Managers
+                  </h3>
+                  <div class="performance r">25%</div>
+                </div>
+              </li>
+              
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    Chris Polhamus
+                  </h3>
+                  <div class="performance r">50%</div>
+                </div>
+              </li>
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    Patrick Florea
+                  </h3>
+                  <div class="performance g">75%</div>
+                </div>
+              </li>
+            </ul>
+          </li>
+          
+          <li>
+            <ul>
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    <div class="color-label o"></div>
+                    Account Managers
+                  </h3>
+                  <div class="performance r">25%</div>
+                </div>
+              </li>
+              
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    Chris Polhamus
+                  </h3>
+                  <div class="performance r">50%</div>
+                </div>
+              </li>
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    Patrick Florea
+                  </h3>
+                  <div class="performance g">75%</div>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <ul>
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    <div class="color-label c"></div>
+                    Account Managers
+                  </h3>
+                  <div class="performance r">25%</div>
+                </div>
+              </li>
+              
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    Chris Polhamus
+                  </h3>
+                  <div class="performance r">50%</div>
+                </div>
+              </li>
+              <li>
+                <div class="group">
+                  <h3 class="group-name">
+                    Patrick Florea
+                  </h3>
+                  <div class="performance g">75%</div>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </div>
     </div>
   </div>

@@ -1,7 +1,7 @@
 {
-  "name": "static",
+  "name": "jh-kpi-dashboard",
   "version": "1.0.0",
-  "description": "This is a static template with no bundling",
+  "description": "JH KPI Dashboard Sandbox - Static",
   "main": "index.html",
   "scripts": {
     "start": "serve",
@@ -14,14 +14,12 @@
   "keywords": [
     "static",
     "template",
-    "codesandbox"
+    "codesandbox",
+    "chartjs",
+    "gridstack"
   ],
-  "author": "Ives van Hoorne",
+  "author": "Nick Barrow",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/codesandbox-app/static-template/issues"
-  },
-  "homepage": "https://github.com/codesandbox-app/static-template#readme",
   "devDependencies": {
     "serve": "^11.2.0"
   }
